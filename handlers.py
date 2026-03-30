@@ -1407,20 +1407,20 @@ async def add_admin_command(update: Update, context: CallbackContext) -> None:
         )
         return
 
-    # Case 1: no admins yet -> current user becomes first admin
+    # Case 1: no admins yet -> current user becomes first superadmin
     if not any_admins:
         try:
-            add_admin(user.id, user.username)
+            add_admin(user.id, user.username, is_super=True)
         except Exception:
             await update.message.reply_text(
                 "Не удалось добавить вас как администратора. Попробуйте позже."
             )
             return
 
+        uname = f"\nusername: @{user.username}" if user.username else ""
         await update.message.reply_text(
-            f"Вы назначены первым администратором.\n"
-            f"user_id: {user.id}\n"
-            f"username: @{user.username}" if user.username else ""
+            f"Вы назначены первым администратором (суперадмин).\n"
+            f"user_id: {user.id}{uname}"
         )
         return
 

@@ -100,17 +100,17 @@ def create_tables() -> None:
         raise
 
 
-def add_admin(user_id: int, username: Optional[str]) -> None:
+def add_admin(user_id: int, username: Optional[str], is_super: bool = False) -> None:
     """
     Add administrator to admins table.
-    Intended to be used manually / from separate script.
+    If is_super=True, the admin is created as a superadmin.
     """
     try:
         conn = _get_connection()
         cur = conn.cursor()
         cur.execute(
-            "INSERT OR IGNORE INTO admins (user_id, username) VALUES (?, ?)",
-            (user_id, username),
+            "INSERT OR IGNORE INTO admins (user_id, username, is_super) VALUES (?, ?, ?)",
+            (user_id, username, int(is_super)),
         )
         conn.commit()
         conn.close()
