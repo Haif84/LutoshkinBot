@@ -4,5 +4,6 @@ __pycache__/
 .env
 lutoshkin.db
 *.db
+data/
 .idea/
 .vscode/

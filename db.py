@@ -1,11 +1,12 @@
 import logging
+import os
 import sqlite3
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
-DB_PATH = "lutoshkin.db"
+DB_PATH = os.getenv("DB_PATH", "lutoshkin.db")
 
 
 def _get_connection() -> sqlite3.Connection:

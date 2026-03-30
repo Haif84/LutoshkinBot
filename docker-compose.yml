@@ -1,0 +1,11 @@
+services:
+  lutoshkin-bot:
+    build: .
+    container_name: lutoshkin-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DB_PATH=/app/data/lutoshkin.db
